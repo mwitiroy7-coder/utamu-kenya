@@ -22,14 +22,6 @@ app.get('/', (req, res) => {
     res.sendFile(require('path').join(__dirname, 'index.html'));
 });
 
-    } catch (err) {
-        res.status(500).json({ 
-            message: 'Server error occurred', 
-            database_status: 'Connection Failed',
-            error_details: err.message 
-        });
-    }
-});
 // POST ENDPOINT: Receives and saves a new VVIP Client Matchmaking request
 app.post('/api/vvip-request', async (req, res) => {
     // 1. Unpack the custom form data sent from the browser inputs
