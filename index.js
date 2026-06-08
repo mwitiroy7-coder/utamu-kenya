@@ -18,9 +18,11 @@ app.use(express.json());
 app.use(fileUpload());
 // DYNAMIC TESTING ROUTE: Ping the cloud database table live
 // Serve the frontend landing page directly at the main link
+// Serve the landing page cleanly without crashing the ES module engine
 app.get('/', (req, res) => {
-    res.sendFile(require('path').join(__dirname, 'index.html'));
+    res.sendFile('index.html', { root: '.' });
 });
+
 
 // POST ENDPOINT: Receives and saves a new VVIP Client Matchmaking request
 app.post('/api/vvip-request', async (req, res) => {
