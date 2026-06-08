@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utamu Kenya | Premium Directory</title>
+    <style>
+        /* RESET & BASE APP RULES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-color: #0b020c;
+            /* CURVY REAR TORSO GRAPHIC SILHOUETTE DESIGN WALLPAPER WALL */
+            background-image: linear-gradient(rgba(11, 2, 12, 0.65), rgba(11, 2, 12, 0.85)), 
+                              url('https://unsplash.com');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* TOP LAYOUT BAR SECTION */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            letter-spacing: 1.5px;
+            color: #ff3377;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .vvip-btn {
+            background: linear-gradient(135deg, #ff0055, #990033);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+            transition: 0.3s;
+        }
+
+        .login-gate-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .login-gate-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ff3377;
+        }
+
+        /* DIRECTORY CONTAINER SPACE */
+        main {
+            padding: 40px 4%;
+        }
+
+        /* MATRIX CONFIGURATION MATCHING YOUR IMAGE */
+        .directory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .image-viewport {
+            width: 100%;
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .badge-vip {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ffcc00;
+            color: #111;
+            font-weight: 800;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .card-details {
+            padding: 15px;
+        }
+
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .escort-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .rating-stars {
+            color: #ffcc00;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .escort-loc {
+            font-size: 13px;
+            color: #b3b3b3;
+            margin-bottom: 12px;
+        }
+
+        .price-tag {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ff3377;
+            margin-bottom: 15px;
+        }
+        /* PUBLIC INTERACTIVE RATING ROW CONTAINER */
+        .client-review-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .review-prompt-text {
+            font-size: 11px;
+            color: #aaa;
+            font-weight: 500;
+        }
+        .rate-select-btn {
+            background: none;
+            border: none;
+            color: #ffcc00;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 2px;
+            transition: transform 0.1s;
+        }
+        .rate-select-btn:hover {
+            transform: scale(1.3);
+        }
+
+        .card-actions-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .whatsapp-chat-btn, .direct-call-btn {
+            flex: 1;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .whatsapp-chat-btn { background: #25d366; }
+        .direct-call-btn { background: #007bff; }
+
+        /* MODALS DESIGN LAYOUT */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .auth-modal-box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #ff3377;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; color: #ccc; margin-bottom: 5px; }
+        .form-group input {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3); color: white; font-size: 14px;
+        }
+        .form-group input:focus { border-color: #ff3377; outline: none; }
+        .submit-form-btn {
+            width: 100%; background: #ff3377; color: white; border: none; padding: 12px;
+            border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;
+        }
+        .switch-form-text { font-size: 13px; text-align: center; margin-top: 15px; color: #aaa; }
+        .switch-form-text span { color: #ff3377; cursor: pointer; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <!-- TOP NAVIGATION & ACTION PANEL -->
+    <header>
+        <h1>Utamu Kenya</h1>
+        <div class="header-actions">
+            <button class="login-gate-btn" onclick="toggleModal()">Escort Portal</button>
+            <button class="vvip-btn">Request Admin for VVIP Escort</button>
+        </div>
+    </header>
+
+    <!-- MATRIX MATRIX LAYOUT FRAMEWORK -->
+    <main>
+        <div class="directory-grid" id="main-directory-feed">
+            <!-- Loading indicator that shows while querying cloud database -->
+            <p style="text-align: center; grid-column: span 3; color: #aaa; font-style: italic;">Connecting to dynamic live database feed...</p>
+        </div>
+    </main>
+
+    <!-- MODAL POPUPS FOR ACCOUNTS GATEWAYS -->
+    <div class="modal-overlay" id="portal-modal-overlay">
+        <div class="auth-modal-box">
+            <button class="close-modal-btn" onclick="toggleModal()">✕</button>
+            
+            <div id="login-form-pane">
+                <div class="modal-title">Escort Login</div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" placeholder="enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••">
+                </div>
+                <button class="submit-form-btn" onclick="executeLogin()">Unlock Account Portal</button>
+                <div class="switch-form-text">New profile? <span onclick="switchForm('signup')">Register Here</span></div>
+            </div>
+
+            <div id="signup-form-pane" style="display: none;">
+                <div class="modal-title">Create Escort Account</div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="reg-email" placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" placeholder="Create safe password">
+                </div>
+                <input type="hidden" id="reg-role" value="escort">
+                <button class="submit-form-btn" onclick="executeRegister()">Register Profile</button>
+                <div class="switch-form-text">Already registered? <span onclick="switchForm('login')">Log In</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DYNAMIC CORE SCRIPT INTERACTION HOOK -->
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        // LIVE FETCH: Queries your Express Server engine for real cloud data
+        async function fetchLiveDirectory() {
+            const feedContainer = document.getElementById('main-directory-feed');
+            
+            try {
+                // Fetch profiles view through our secure server port endpoint
+                const response = await fetch(`${API_BASE_URL}/public-escorts`);
+                const escorts = await response.json();
+
+                feedContainer.innerHTML = '';
+
+                // If no real profiles exist yet, it displays nothing but a clean welcome message!
+                if (!escorts || escorts.length === 0) {
+                    feedContainer.innerHTML = `
+                        <p style="text-align: center; grid-column: span 3; color: #ff3377; font-weight: 600; padding: 40px 0;">
+                            Welcome to Utamu Kenya. Escort profiles will populate here upon profile activation.
+                        </p>
+                    `;
+                    return;
+                }
+
+                // Render loops for active entries
+                escorts.forEach(escort => {
+                    const whatsappMessage = encodeURIComponent(`I found your account on Utamu Kenya and I like you. Please respond.`);
+                    const whatsappLink = `https://wa.me{escort.phone_number.replace('+', '')}?text=${whatsappMessage}`;
+
+                    const cardHTML = `
+                        <div class="profile-card">
+                            <div class="image-viewport" style="background-image: url('${escort.main_cover_image || 'https://placeholder.com'}');">
+                                ${escort.subscription_tier === 'vip' ? '<span class="badge-vip">VIP</span>' : ''}
+                            </div>
+                            <div class="card-details">
+                                <div class="card-header-row">
+                                    <div class="escort-name">${escort.username}</div>
+                                    <div class="rating-stars">⭐ ${escort.ratings_average || '0.0'}</div>
+                                </div>
+                                <div class="escort-loc">📍 ${escort.location}</div>
+                                <div class="price-tag">Ksh ${escort.incall_price} Incall</div>
+                                                                <!-- PUBLIC RATING CLICK SYSTEM -->
+                                <div class="client-review-box">
+                                    <span class="review-prompt-text">Rate service after meeting:</span>
+                                    <div>
+                                        <button class="rate-select-btn" onclick="submitPublicReview('${escort.id}', 5)">⭐ Add Review</button>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="card-actions-row">
+                                    <a href="${whatsappLink}" target="_blank" class="whatsapp-chat-btn">WhatsApp</a>
+                                    <a href="tel:${escort.phone_number}" class="direct-call-btn">📞 Call ${escort.username}</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    feedContainer.innerHTML += cardHTML;
+                });
+
+            } catch (err) {
+                feedContainer.innerHTML = `<p style="text-align: center; grid-column: span 3; color: #ff3355;">Failed to load live directory profiles framework.</p>`;
+            }
+        }
+        // PUBLIC TRANSACTION DISPATCH: Sends rating score straight to server
+        async function submitPublicReview(escortId, starsCount) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/escort/rate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ escortId, newRating: starsCount })
+                });
+                const data = await response.json();
+                alert(data.message || data.error);
+                if (data.success) fetchLiveDirectory(); // Refresh score matrix view instantly!
+            } catch (err) { 
+                alert('Failed to process rating click transaction.'); 
+            }
+        }
+
+        // AUTHENTICATION FORMS TRANSMISSION SCRIPTS
+        async function executeRegister() {
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const role = document.getElementById('reg-role').value;
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, role })
+                });
+                const data = await res.json();
+                alert(data.message || data.error);
+                if (data.success) switchForm('login');
+            } catch (err) { alert('Registration request connection lost.'); }
+        }
+
+        async function executeLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                alert(data.message || data.error);
+            } catch (err) { alert('Login system request connection lost.'); }
+        }
+
+        function toggleModal() { document.getElementById('portal-modal-overlay').classList.toggle('active'); }
+        function switchForm(target) {
+            const loginPane = document.getElementById('login-form-pane'), signupPane = document.getElementById('signup-form-pane');
+            if (target === 'signup') { loginPane.style.display = 'none'; signupPane.style.display = 'block'; }
+            else { loginPane.style.display = 'block'; signupPane.style.display = 'none'; }
+        }
+
+        // Boot and query live connection instantly upon access entrance
+        fetchLiveDirectory();
+    </script>
+</body>
+</html>

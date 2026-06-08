@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utamu Kenya | Complete Your Profile Setup</title>
+    <style>
+        /* RESET & BASE DESIGN MATRIX RULES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-y: auto;
+            background-color: #0b020c;
+            /* SIGNATURE STYLIZED REAR TORSO GRAPHIC SILHOUETTE WALLPAPER WALL */
+            background-image: linear-gradient(rgba(11, 2, 12, 0.7), rgba(11, 2, 12, 0.9)), 
+                              url('https://unsplash.com');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* GLASSMORPHISM DASHBOARD PANEL WRAPPER */
+        .setup-container-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .panel-heading {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ff3377;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .panel-subtext {
+            font-size: 14px;
+            color: #b3b3b3;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* FLEX INPUT FIELD GRIDS */
+        .form-row-twin {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-block {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-block label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e6e6e6;
+        }
+
+        .input-block input, .input-block select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .input-block input:focus {
+            border-color: #ff3377;
+            outline: none;
+        }
+
+        /* SERVICES CHECKBOX MATRIX STYLES */
+        .services-matrix-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .matrix-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff3377;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .checkbox-flex-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .checkbox-option-tag {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #ddd;
+            cursor: pointer;
+        }
+
+        .checkbox-option-tag input {
+            accent-color: #ff3377;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        /* COMPLETION BUTTON STYLING */
+        .activate-profile-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff0055, #990033);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .activate-profile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 85, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            .form-row-twin { flex-direction: column; gap: 15px; }
+            .checkbox-flex-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- PROFILE SETUP FORM WRAPPER BOX -->
+    <div class="setup-container-panel">
+        <div class="panel-heading">Setup Your Public Directory Profile</div>
+        <div class="panel-subtext">Fill out your profile configuration details. Pricing entry is restricted to a minimum of 2000 Ksh.</div>
+
+        <form id="profile-setup-form" onsubmit="submitEscortProfile(event)">
+            
+            <!-- ROW 1: USERNAME & LOCATION -->
+            <div class="form-row-twin">
+                <div class="input-block">
+                    <label>Public Profile Username</label>
+                    <input type="text" id="escort-username" placeholder="e.g. Amber" required>
+                </div>
+                <div class="input-block">
+                    <label>Operational City / Area Location</label>
+                    <input type="text" id="escort-location" placeholder="e.g. Kilimani, Nairobi" required>
+                </div>
+            </div>
+
+            <!-- ROW 2: TELEPHONE PHONE LINE MATRIX -->
+            <div class="form-row-twin">
+                <div class="input-block">
+                    <label>Phone Number (Include Country Code)</label>
+                    <input type="text" id="escort-phone" placeholder="e.g. +254700111222" required>
+                </div>
+            </div>
+
+            <!-- ROW 3: INCALL & OUTCALL PRICE CONTROLS (MINIMUM 2000 LIMIT SET) -->
+            <div class="form-row-twin">
+                <div class="input-block">
+                    <label>Incall Price per Session (Ksh)</label>
+                    <input type="number" id="price-incall" min="2000" placeholder="Minimum 2000" required>
+                </div>
+                <div class="input-block">
+                    <label>Outcall Price per Session (Ksh)</label>
+                    <input type="number" id="price-outcall" min="2000" placeholder="Minimum 2000" required>
+                </div>
+            </div>
+
+            <!-- ROW 4: DYNAMIC SELECT SERVICES AREA CHECKS -->
+            <div class="services-matrix-box">
+                <div class="matrix-title">Select Your Available Service Offerings</div>
+                <div class="checkbox-flex-grid">
+                    <label class="checkbox-option-tag"><input type="checkbox" name="services" value="Oral / Blowjobs"> Oral / Blowjobs</label>
+                    <label class="checkbox-option-tag"><input type="checkbox" name="services" value="Anal Sex"> Anal Sex</label>
+                    <label class="checkbox-option-tag"><input type="checkbox" name="services" value="Kutomba Mwitu"> Kutomba Mwitu</label>
+                    <label class="checkbox-option-tag"><input type="checkbox" name="services" value="Full Body Massage"> Full Body Massage</label>
+                    <label class="checkbox-option-tag"><input type="checkbox" name="services" value="Unprotected (Upon Agreement)"> Unprotected (Agreement)</label>
+                    <label class="checkbox-option-tag"><input type="checkbox" name="services" value="Vip Treatment"> VIP Escort Treatment</label>
+                </div>
+            </div>
+
+            <button type="submit" class="activate-profile-btn">Initialize Profile & Wallet</button>
+        </form>
+    </div>
+
+    <!-- CORE TRANSACTION DISPATCH SCRIPT ROUTINES -->
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        async function submitEscortProfile(event) {
+            event.preventDefault(); // Blocks default form page reloading actions
+
+            // Get logged-in user id out of local workspace cache
+            const userId = localStorage.getItem('utamu_user_id');
+            if (!userId) {
+                alert('Session expired. Please log back into your escort portal.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Target selected category checkbox offerings into an array list bundle
+            const selectedServices = [];
+            const checkboxes = document.querySelectorAll('input[name="services"]:checked');
+            checkboxes.forEach(box => selectedServices.push(box.value));
+
+            // Package the transaction details
+            const profilePayload = {
+                userId: userId,
+                username: document.getElementById('escort-username').value,
+                location: document.getElementById('escort-location').value,
+                phone: document.getElementById('escort-phone').value,
+                incall: parseFloat(document.getElementById('price-incall').value),
+                outcall: parseFloat(document.getElementById('price-outcall').value),
+                services: selectedServices
+            };
+
+            try {
+                // Post payload details over our network server path
+                const response = await fetch(`${API_BASE_URL}/escort/create-profile`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(profilePayload)
+                });
+
+                const result = await response.json();
+                alert(result.message || result.error);
+
+                if (result.success) {
+                    // Redirect to her active billing portal page or layout feed
+                    window.location.href = 'index.html';
+                }
+            } catch (err) {
+                alert('Connection transaction network pipeline failed.');
+            }
+        }
+    </script>
+</body>
+</html>

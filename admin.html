@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utamu Kenya | Master Admin Control Dashboard</title>
+    <style>
+        /* RESET & MASTER SCHEME METRICS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-y: auto;
+            background-color: #050106;
+            padding: 30px 4%;
+        }
+
+        /* ADMIN BANNER HEADER CONTAINER */
+        .admin-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #15051a, #0b020c);
+            border: 1px solid rgba(255, 51, 119, 0.2);
+            border-radius: 16px;
+            margin-bottom: 45px;
+            box-shadow: 0 8px 32px rgba(255, 51, 119, 0.05);
+        }
+
+        .admin-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ff3377;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .system-badge {
+            background: rgba(255, 51, 119, 0.1);
+            border: 1px solid #ff3377;
+            color: #ff3377;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* DATA MANAGEMENT SCHEDULER MATRIX */
+        .report-section-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .section-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+
+        /* MANAGEMENT DATA TABLE INTERFACE */
+        .table-responsive-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ff3377;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 14px 18px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        td {
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #e0e0e0;
+            vertical-align: middle;
+        }
+
+        tr:hover td { background: rgba(255, 255, 255, 0.01); }
+
+        .status-pill {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-pill.active-paid { background: rgba(37, 211, 102, 0.15); color: #25d366; }
+        .status-pill.expired { background: rgba(255, 51, 51, 0.15); color: #ff5555; }
+        .status-pill.bypassed { background: rgba(0, 123, 255, 0.15); color: #007bff; }
+
+        .override-action-btn {
+            background: #007bff; color: white; border: none; padding: 8px 14px;
+            border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; transition: background 0.2s;
+        }
+        .override-action-btn:hover { background: #0056b3; }
+        .override-action-btn.remove-bypass { background: rgba(255, 255, 255, 0.1); color: #ccc; border: 1px solid rgba(255, 255, 255, 0.15); }
+
+        /* ROOT GATE PROMPT GATEWAY GATE STYLES */
+        .admin-gate-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050106;
+            display: flex; justify-content: center; align-items: center; z-index: 5000;
+        }
+        .gate-box {
+            background: #0f0412; border: 1px solid #ff3377; border-radius: 16px; padding: 40px; width: 100%; max-width: 360px; box-shadow: 0 10px 40px rgba(255, 51, 119, 0.1);
+        }
+        .gate-input {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); background: #000; color: white; font-size: 14px; margin-bottom: 20px;
+        }
+        .gate-btn {
+            width: 100%; background: #ff3377; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; text-transform: uppercase; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- SECURITY CONTROL PROMPT SIGN-IN GATE -->
+    <div class="admin-gate-overlay" id="security-lock-gate">
+        <div class="gate-box">
+            <div class="admin-title" style="text-align: center; margin-bottom: 25px;">Enter Access Key</div>
+            <input type="password" id="admin-security-pass" class="gate-input" placeholder="••••••••">
+            <button class="gate-btn" onclick="verifyAdminKey()">Unlock System Tools</button>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT AREA -->
+    <div id="master-admin-workspace" style="display: none;">
+        <div class="admin-banner">
+            <div class="admin-title">Utamu Kenya Command Center</div>
+            <div class="system-badge">System Root Authorization Access</div>
+        </div>
+
+        <main class="report-section-card">
+            <div class="section-label">Master Escort Registration Records & Visibility Override Grid</div>
+            <div class="table-responsive-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Location</th>
+                            <th>Wallet Balance</th>
+                            <th>Current Status</th>
+                            <th>Administrative Action Toggle</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-escort-table-rows">
+                        <tr><td colspan="5" style="text-align: center; color: #aaa; font-style: italic;">Connecting to master report framework...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- AUTOMATION DISPATCH ENGINE SCRIPTS -->
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        // Secure client-side password block. You can change 'utamu2026' to your own preferred master password word link
+        function verifyAdminKey() {
+            const secretInput = document.getElementById('admin-security-pass').value;
+            if (secretInput === 'utamu2026') { 
+                document.getElementById('security-lock-gate').style.display = 'none';
+                document.getElementById('master-admin-workspace').style.display = 'block';
+                loadMasterAdminReport(); // Load table rows only after passing security checks!
+            } else {
+                alert('Invalid security authorization master entry pass.');
+            }
+        }
+
+        async function loadMasterAdminReport() {
+            const tableBody = document.getElementById('admin-escort-table-rows');
+            try {
+                const response = await fetch(`${API_BASE_URL}/admin/all-escorts`);
+                const result = await response.json();
+
+                if (result.success) {
+                    tableBody.innerHTML = '';
+                    if (result.escorts.length === 0) {
+                        tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #aaa;">No registered escort rows inside your database sheets.</td></tr>`;
+                        return;
+                    }
+
+                    result.escorts.forEach(escort => {
+                        let pillClass = 'active-paid';
+                        let pillText = escort.status;
+
+                        if (escort.status === 'Expired') pillClass = 'expired';
+                        if (escort.status === 'Admin Override Live') {
+                            pillClass = 'bypassed';
+                            pillText = 'Live (Admin Bypass)';
+                        }
+
+                        const isBypassed = escort.is_admin_approved;
+                        const buttonText = isBypassed ? '✕ Remove Bypass' : '⚡ Force Public Live';
+                        const buttonClass = isBypassed ? 'override-action-btn remove-bypass' : 'override-action-btn';
+                        const alternativeState = !isBypassed;
+
+                        const rowHTML = `
+                            <tr>
+                                <td style="font-weight: 600; color: #fff;">${escort.username}</td>
+                                <td>📍 ${escort.location}</td>
+                                <td style="font-weight: 700; color: #25d366;">Ksh ${parseFloat(escort.virtual_wallet).toLocaleString()}.00</td>
+                                <td><span class="status-pill ${pillClass}">${pillText}</span></td>
+                                <td>
+                                    <button class="${buttonClass}" onclick="toggleAdminBypass('${escort.id}', ${alternativeState})">
+                                        ${buttonText}
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += rowHTML;
+                    });
+                }
+            } catch (err) {
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff3355;">Connection handshake breakdown timeout.</td></tr>`;
+            }
+        }
+
+        async function toggleAdminBypass(profileId, targetState) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/admin/override-status`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ profileId, forcePublic: targetState })
+                });
+                const data = await response.json();
+                alert(data.message || data.error);
+                if (data.success) loadMasterAdminReport();
+            } catch (err) { alert('Administrative command dispatch failure.'); }
+        }
+    </script>
+</body>
+</html>

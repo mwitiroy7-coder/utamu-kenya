@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utamu Kenya | Private Escort Dashboard</title>
+    <style>
+        /* RESET & BASE MATRIX ARCHITECTURE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-y: auto;
+            background-color: #0b020c;
+            /* SIGNATURE STYLIZED REAR REAR GRAPHIC SILHOUETTE WALLPAPER WALL */
+            background-image: linear-gradient(rgba(11, 2, 12, 0.75), rgba(11, 2, 12, 0.9)), 
+                              url('https://unsplash.com');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 30px 4%;
+        }
+
+        /* TOP WORKSPACE NAVIGATION BAR */
+        .dash-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-title { font-size: 20px; font-weight: 600; color: #ff3377; }
+        
+        .logout-btn {
+            background: rgba(255, 51, 51, 0.15);
+            border: 1px solid rgba(255, 51, 51, 0.3);
+            color: #ff5555;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .logout-btn:hover { background: rgba(255, 51, 51, 0.3); }
+
+        /* TWO-COLUMN METRIC WIDGET BLOCK PANEL GRID */
+        .dash-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 30px;
+        }
+
+        /* CARD CONTAINERS BLOCK MODULE */
+        .dash-card-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel-section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ff3377;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        /* DIGITAL WALLET STYLES */
+        .wallet-display-amount {
+            font-size: 34px;
+            font-weight: 800;
+            color: #25d366;
+            margin-bottom: 10px;
+        }
+        .wallet-sub { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+
+        .renew-plan-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff0055, #990033);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3);
+        }
+
+        /* IMAGE GRID MANAGER SELECTION TOOL */
+        .media-manager-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .media-slot-item {
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            aspect-ratio: 1 / 1.2;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .media-slot-item.has-image { border-style: solid; border-color: rgba(255, 255, 255, 0.2); }
+
+        .main-pick-overlay-bar {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 6px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .main-pick-overlay-bar label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #ccc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .main-pick-overlay-bar input[type="radio"] { accent-color: #ff3377; }
+
+        .save-settings-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            float: right;
+        }
+        .save-settings-btn:hover { background: #0056b3; }
+
+        @media (max-width: 850px) {
+            .dash-grid-layout { grid-template-columns: 1fr; }
+            .media-manager-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <!-- MAIN PRIVATE ACCOUNT VIEW INTERFACE CONTAINER -->
+    <div class="dash-nav">
+        <div class="welcome-title" id="provider-welcome">Dashboard Portal</div>
+        <button class="logout-btn" onclick="executeLogout()">Sign Out securely</button>
+    </div>
+
+    <div class="dash-grid-layout">
+        
+        <!-- BLOCK COLUMN A: WALLET BALANCE TRACKER MODULE (PRIVATE) -->
+        <div class="dash-card-panel">
+            <div class="panel-section-title">🔒 Digital Account Wallet</div>
+            <div class="wallet-display-amount" id="wallet-balance-view">Ksh 10,000.00</div>
+            <div class="wallet-sub">Initial virtual pre-load active. Funds auto-deplete upon tier status verification renewal cycles.</div>
+            
+            <div style="margin-top: 25px;">
+                <div class="panel-section-title" style="margin-bottom:12px; border:none; padding:0;">Subscription Management</div>
+                <button class="renew-plan-btn">Renew VIP Tier (1,000 Ksh)</button>
+            </div>
+        </div>
+
+        <!-- BLOCK COLUMN B: PRIVATELY MANAGED PHOTO SELECTION PACK -->
+        <div class="dash-card-panel">
+            <div class="panel-section-title">🖼️ Media Photo Slots (Choose 1 Main Cover Image)</div>
+            
+            <div class="media-manager-grid">
+                <!-- SLOT 0 -->
+                <div class="media-slot-item has-image" style="background-image: url('https://unsplash.com');">
+                    <div class="main-pick-overlay-bar">
+                        <label><input type="radio" name="mainCover" value="0" checked> Set Cover</label>
+                    </div>
+                </div>
+                <!-- SLOT 1 -->
+                <div class="media-slot-item" style="background-image: url('https://placeholder.com');">
+                    <div class="main-pick-overlay-bar">
+                        <label><input type="radio" name="mainCover" value="1"> Set Cover</label>
+                    </div>
+                </div>
+                <!-- SLOT 2 -->
+                <div class="media-slot-item" style="background-image: url('https://placeholder.com');">
+                    <div class="main-pick-overlay-bar">
+                        <label><input type="radio" name="mainCover" value="2"> Set Cover</label>
+                    </div>
+                </div>
+                <!-- SLOT 3 -->
+                <div class="media-slot-item" style="background-image: url('https://placeholder.com');">
+                    <div class="main-pick-overlay-bar">
+                        <label><input type="radio" name="mainCover" value="3"> Set Cover</label>
+                    </div>
+                </div>
+                <!-- SLOT 4 -->
+                <div class="media-slot-item" style="background-image: url('https://placeholder.com');">
+                    <div class="main-pick-overlay-bar">
+                        <label><input type="radio" name="mainCover" value="4"> Set Cover</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="save-settings-btn" onclick="saveCoverSelection()">Save Main Selection</button>
+        </div>
+
+    </div>
+
+    <!-- DYNAMIC CACHE FETCH DISPATCH BLOCK -->
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        async function loadPrivateDashboard() {
+            const userId = localStorage.getItem('utamu_user_id');
+            if (!userId) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                // Fetch private escort telemetry metrics securely using the session identity link
+                const res = await fetch(`${API_BASE_URL}/escort/private-data/${userId}`);
+                const data = await res.json();
+
+                if (data.profile) {
+                    document.getElementById('provider-welcome').innerText = `Welcome back, ${data.profile.username}!`;
+                    document.getElementById('wallet-balance-view').innerText = `Ksh ${parseFloat(data.profile.virtual_wallet).toLocaleString()}.00`;
+                    
+                    // Preset her active choice index radio selector dot natively on screen
+                    const radioOption = document.querySelector(`input[name="mainCover"][value="${data.profile.main_image_index}"]`);
+                    if (radioOption) radioOption.checked = true;
+                }
+            } catch (err) { console.log('Private pipeline sync timeout.'); }
+        }
+
+        async function saveCoverSelection() {
+            const userId = localStorage.getItem('utamu_user_id');
+            const selectedIndex = document.querySelector('input[name="mainCover"]:checked').value;
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/escort/update-cover`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, selectedIndex: parseInt(selectedIndex) })
+                });
+                const result = await res.json();
+                alert(result.message || result.error);
+            } catch (err) { alert('Failed to transmit selection adjustment.'); }
+        }
+
+        function executeLogout() {
+            localStorage.clear(); // Flushes authorization tokens out of security memory cache
+            window.location.href = 'index.html';
+        }
+
+        // Run fetch routine immediately on entry
+        loadPrivateDashboard();
+    </script>
+</body>
+</html>
