@@ -17,18 +17,11 @@ app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
 // DYNAMIC TESTING ROUTE: Ping the cloud database table live
-app.get('/', async (req, res) => {
-    try {
-        // Run a lightning-fast count request on our active users table
-        const { data, error } = await supabase.from('users').select('count', { count: 'exact', head: true });
-        
-        if (error) throw error;
-        
-        res.json({
-            message: 'Utamu Kenya Backend Engine is Live and Running!',
-            database_status: 'Connected Successfully to Cloud Storage!',
-            current_users_count: 0
-        });
+// Serve the frontend landing page directly at the main link
+app.get('/', (req, res) => {
+    res.sendFile(require('path').join(__dirname, 'index.html'));
+});
+
     } catch (err) {
         res.status(500).json({ 
             message: 'Server error occurred', 
